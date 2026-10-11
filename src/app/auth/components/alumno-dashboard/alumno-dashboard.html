@@ -1,0 +1,92 @@
+
+<div class="app-layout">
+  
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="badge-brand">Aula Nexa</span>
+      <h2>Portal Alumno</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-title">MI APRENDIZAJE</span>
+      
+      <a (click)="cambiarSeccion('inicio')" [class.active]="seccionActiva === 'inicio'" class="nav-item">
+        <span>Inicio General</span>
+      </a>
+
+      <a (click)="cambiarSeccion('cursos')" [class.active]="seccionActiva === 'cursos'" class="nav-item">
+        <span>Mis Cursos</span>
+      </a>
+    </nav>
+  </aside>
+
+ 
+  <main class="main-content">
+    
+    
+    <header class="top-navbar">
+      <div></div> 
+      <div class="user-profile">
+        <span class="avatar">{{ inicialesAvatar() }}</span>
+        <div class="user-meta">
+          <strong>{{ nombreUsuario() }}</strong>
+          <small>Alumno</small>
+        </div>
+      </div>
+    </header>
+
+    
+    <div class="dashboard-scroll-area">
+      
+      
+      <div *ngIf="seccionActiva === 'inicio'">
+        <header class="dashboard-header">
+          <div class="user-welcome">
+            <span class="badge">Perfil Alumno</span>
+            <h1>Bienvenido al Portal Académico</h1>
+            <p>Accede a tus asignaturas y avances lectivos.</p>
+          </div>
+        </header>
+
+        <section class="metrics-grid">
+          <div class="metric-card" (click)="cambiarSeccion('cursos')" style="cursor: pointer;">
+            <div>
+              <h3>3</h3>
+              <p>Cursos Inscritos</p>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div>
+              <h3>17.5</h3>
+              <p>Promedio Ponderado</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="navigation-section">
+          <h2>Módulos Disponibles</h2>
+          <div class="nav-cards-grid">
+            <div class="nav-card" (click)="cambiarSeccion('cursos')">
+              <div class="card-body">
+                <h3>Mis Cursos</h3>
+                <p>Revisa el material de estudio, tareas y calificaciones de tus asignaturas.</p>
+              </div>
+              <button class="btn-primary">Ir a Cursos</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div *ngIf="seccionActiva === 'cursos'" class="section-view">
+        <div class="section-header-flex">
+          <h2>Mis Asignaturas</h2>
+        </div>
+        <div class="card-content-box">
+          <p>Revisa el material de estudio, tareas y calificaciones de tus asignaturas matriculadas.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

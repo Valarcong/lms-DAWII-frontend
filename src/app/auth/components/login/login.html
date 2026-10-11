@@ -1,0 +1,49 @@
+<div class="contenedor-principal-login">
+  <div class="tarjeta-login">
+    <div class="encabezado-login">
+      <h2>Plataforma LMS</h2>
+      <p>Proyecto de curso</p>
+    </div>
+
+    <div *ngIf="errorMessage()" class="alerta-error">
+      {{ errorMessage() }}
+    </div>
+
+    <div *ngIf="successMessage()" class=" alerta-exito">
+      {{ successMessage() }}
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="grupo-formulario">
+        <label for="username">Usuario o Correo</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          [(ngModel)]="credentials.username" 
+          placeholder="Ej. admin, docente1, alumno1"
+          required 
+          [disabled]="loading()"
+        />
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="password">Contraseña</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          [(ngModel)]="credentials.password" 
+          placeholder="••••••••"
+          required 
+          [disabled]="loading()"
+        />
+      </div>
+
+      <button type="submit" class="boton-enviar" [disabled]="loading()">
+        <span *ngIf="loading()">Ingresando...</span>
+        <span *ngIf="!loading()">Iniciar Sesión</span>
+      </button>
+    </form>
+  </div>
+</div>

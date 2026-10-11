@@ -1,0 +1,154 @@
+<div class="app-layout">
+  
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="badge-brand">Aula Nexa</span>
+      <h2>Portal Docente</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-title">ACADEMIA</span>
+      
+      
+      <a (click)="cambiarSeccion('inicio')" [class.active]="seccionActiva === 'inicio'" class="nav-item">
+        <span>Inicio</span>
+      </a>
+
+     
+      <a (click)="cambiarSeccion('cursos')" [class.active]="seccionActiva === 'cursos'" class="nav-item">
+        <span>Mis módulos</span>
+      </a>
+
+     
+      <a (click)="cambiarSeccion('tareas')" [class.active]="seccionActiva === 'tareas'" class="nav-item">
+        <span>Tareas</span>
+      </a>
+
+      <span class="nav-section-title">COMUNIDAD</span>
+      
+    
+      <a (click)="cambiarSeccion('foros')" [class.active]="seccionActiva === 'foros'" class="nav-item">
+        <span>Foros</span>
+      </a>
+    </nav>
+  </aside>
+
+  
+  <main class="main-content">
+    
+    
+    <header class="top-navbar">
+      <div></div> 
+      <div class="user-profile">
+        <span class="avatar">{{ inicialesAvatar() }}</span>
+        <div class="user-meta">
+          <strong>{{ nombreUsuario() }}</strong>
+          <small>Docente</small>
+        </div>
+      </div>
+    </header>
+
+   
+    <div class="dashboard-scroll-area">
+      
+      
+      <div *ngIf="seccionActiva === 'inicio'">
+        <section class="welcome-banner">
+          <div class="welcome-text">
+            <span class="portal-tag">PORTAL DOCENTE</span>
+            <h2>Hola, {{ nombreUsuario() }}</h2>
+            <p>Gestiona tus módulos, prepara tus sesiones y revisa las entregas de tus alumnos.</p>
+            <div class="banner-badges">
+              <span class="tag-green">Entregas al día</span>
+              <span class="tag-green-light">2 módulos en curso</span>
+            </div>
+          </div>
+          <div class="next-session-card">
+            <small>PRÓXIMA SESIÓN</small>
+            <div class="session-info">
+              <div class="date-box">26 <span>SEP</span></div>
+              <div>
+                <strong>Sesión 4 · Taller práctico</strong>
+                <p>Estrategia digital</p>
+              </div>
+            </div>
+            <p class="session-time">Sábado, 26 de septiembre · 7:00 p. m.</p>
+            <button class="btn-prepare">Preparar sesión</button>
+          </div>
+        </section>
+
+        <section class="metrics-row">
+          <div class="metric-box" (click)="cambiarSeccion('cursos')">
+            <small>Módulos con acceso</small>
+            <h3>6</h3>
+            <a href="javascript:void(0);">Ver módulos ↗</a>
+          </div>
+          <div class="metric-box">
+            <small>Próximas sesiones</small>
+            <h3>4</h3>
+            <p>Sesiones que dictarás</p>
+          </div>
+          <div class="metric-box" (click)="cambiarSeccion('tareas')">
+            <small>Entregas por revisar</small>
+            <h3>0</h3>
+            <a href="javascript:void(0);">Ver tareas ↗</a>
+          </div>
+          <div class="metric-box" (click)="cambiarSeccion('foros')">
+            <small>Temas activos en foros</small>
+            <h3>2</h3>
+            <a href="javascript:void(0);">Ver foros ↗</a>
+          </div>
+        </section>
+      </div>
+
+      
+      <div *ngIf="seccionActiva === 'cursos'" class="section-view">
+        <div class="section-header-flex">
+          <h2>Mis Módulos Asignados</h2>
+        </div>
+        
+        <div *ngIf="cargando" class="loading-box">
+          <p>Cargando tus módulos...</p>
+        </div>
+
+        <div *ngIf="!cargando && listaCursosDocente.length === 0" class="empty-box">
+          <p>No tienes módulos asignados actualmente.</p>
+        </div>
+
+        <div class="cursos-grid">
+          <div *ngFor="let curso of listaCursosDocente" class="card">
+            <h3>{{ curso.nombre || curso.titulo || 'Módulo Académico' }}</h3>
+            <p>{{ curso.descripcion || 'Gestión de contenidos y sesiones de clase.' }}</p>
+            <div class="card-footer">
+              <span class="status active">En Curso</span>
+              <button class="btn-detail">Ver detalle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div *ngIf="seccionActiva === 'tareas'" class="section-view">
+        <div class="section-header-flex">
+          <h2>Gestión de Tareas y Entregas</h2>
+          <button class="btn-primary-action">+ Crear Tarea</button>
+        </div>
+        <div class="card-content-box">
+          <p>Aquí podrás configurar las fechas límites, calificar las entregas de los alumnos y adjuntar consignas de trabajo.</p>
+        </div>
+      </div>
+
+      
+      <div *ngIf="seccionActiva === 'foros'" class="section-view">
+        <div class="section-header-flex">
+          <h2>Foros de Debate y Comunidad</h2>
+          <button class="btn-primary-action">+ Nuevo Tema de Debate</button>
+        </div>
+        <div class="card-content-box">
+          <p>Espacio interactivo donde los estudiantes y docentes publican dudas, anuncios oficiales e hilos de discusión académica.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

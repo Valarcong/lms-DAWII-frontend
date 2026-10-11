@@ -1,0 +1,112 @@
+<div class="app-layout">
+  
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="badge-brand">Administrativo</span>
+      <h2>Panel Admin</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-title">CONTROL GLOBAL</span>
+      
+      <a (click)="cambiarSeccion('inicio')" [class.active]="seccionActiva === 'inicio'" class="nav-item">
+        <span>Inicio General</span>
+      </a>
+      
+      <a (click)="cambiarSeccion('cursos')" [class.active]="seccionActiva === 'cursos'" class="nav-item">
+        <span>Gestión de Cursos</span>
+      </a>
+
+      <span class="nav-section-title">ADMINISTRACIÓN</span>
+      
+      <a (click)="cambiarSeccion('usuarios')" [class.active]="seccionActiva === 'usuarios'" class="nav-item">
+        <span>Usuarios & Docentes</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    
+    <header class="top-navbar">
+      <div></div> 
+      <div class="user-profile">
+        <span class="avatar">{{ inicialesAvatar() }}</span>
+        <div class="user-meta">
+          <strong>{{ nombreUsuario() }}</strong>
+          <small>Administrador</small>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-scroll-area">
+      
+      <div *ngIf="seccionActiva === 'inicio'">
+        <header class="dashboard-header">
+          <div class="user-welcome">
+            <span class="badge admin">Perfil Administrador</span>
+            <h1>Panel de Gestión</h1>
+            <p>Administración global de usuarios, cursos y métricas del sistema.</p>
+          </div>
+        </header>
+
+        <section class="metrics-grid">
+          <div class="metric-card" (click)="cambiarSeccion('usuarios')" style="cursor: pointer;">
+            <div>
+              <h3>150</h3>
+              <p>Alumnos registrados</p>
+            </div>
+            <a href="javascript:void(0);">Ver lista ↗</a>
+          </div>
+          <div class="metric-card" (click)="cambiarSeccion('usuarios')" style="cursor: pointer;">
+            <div>
+              <h3>12</h3>
+              <p>Docentes Activos</p>
+            </div>
+            <a href="javascript:void(0);">Ver docentes ↗</a>
+          </div>
+          <div class="metric-card" (click)="cambiarSeccion('cursos')" style="cursor: pointer;">
+            <div>
+              
+              <p>Cursos Publicados</p>
+            </div>
+            <a href="javascript:void(0);">Ver cursos ↗</a>
+          </div>
+        </section>
+
+        <section class="navigation-section">
+          <h2>Accesos Rápidos de Gestión</h2>
+          <div class="nav-cards-grid">
+            <div class="nav-card" (click)="cambiarSeccion('cursos')">
+              <div class="card-body">
+                <h3>Gestión de Cursos</h3>
+                <p>Administra la oferta académica de cursos, asignación de docentes y horarios.</p>
+              </div>
+              <button class="btn-primary">Gestionar Cursos</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div *ngIf="seccionActiva === 'cursos'" class="section-view">
+        <div class="section-header-flex">
+          <h2>Administración de Cursos Globales</h2>
+          <button class="btn-primary-action">+ Crear Nuevo Curso</button>
+        </div>
+        <div class="card-content-box">
+          <p>Aquí puedes dar de alta nuevos cursos, modificar los temarios vigentes y reasignar los profesores encargados de impartirlos en Aula Nexa.</p>
+        </div>
+      </div>
+
+      <div *ngIf="seccionActiva === 'usuarios'" class="section-view">
+        <div class="section-header-flex">
+          <h2>Gestión de Usuarios y Roles</h2>
+          <button class="btn-primary-action">+ Registrar Usuario</button>
+        </div>
+        <div class="card-content-box">
+          <p>Control de cuentas de acceso para Administradores, Docentes y Alumnos de la plataforma.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
